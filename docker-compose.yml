@@ -6,6 +6,9 @@ services:
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
 
   promtail:
     image: grafana/promtail:2.9.0
@@ -13,6 +16,9 @@ services:
       - ./logs:/var/log/app
       - ./promtail-config.yml:/etc/promtail/config.yml
     command: -config.file=/etc/promtail/config.yml
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
 
   grafana:
     image: grafana/grafana:10.0.3
@@ -20,6 +26,9 @@ services:
       - "3001:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
 
 volumes:
   grafana-storage:
