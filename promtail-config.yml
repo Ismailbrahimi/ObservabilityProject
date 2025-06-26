@@ -14,4 +14,4 @@ scrape_configs:
           - localhost
         labels:
           job: node-app
-          __path__: /var/log/combined.log
+          __path__: /var/log/app/combined.log
