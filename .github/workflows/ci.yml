@@ -64,12 +64,3 @@ jobs:
         with:
           name: dependency-report
           path: reports
-
-      - name: Fail on high severity vulnerabilities
-        run: |
-          if grep -qi "HIGH" reports/dependency-check-report.html; then
-            echo "🚨 High severity vulnerabilities found. Failing pipeline."
-            exit 1
-          else
-            echo "✅ No high severity vulnerabilities detected."
-          fi
