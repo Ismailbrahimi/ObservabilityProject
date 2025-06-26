@@ -1,30 +1,55 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const csurf = require('csurf');
+const csrf = require('csurf');
+const winston = require('winston');
 
 const app = express();
-
-// Middleware pour parser les cookies (nécessaire pour csurf)
-app.use(cookieParser());
-
-// Middleware CSRF, avec stockage du token dans un cookie
-app.use(csurf({ cookie: true }));
-
-// Middleware pour gérer les erreurs CSRF
-app.use((err, req, res, next) => {
-  if (err.code !== 'EBADCSRFTOKEN') return next(err);
-  res.status(403);
-  res.send('Form tampered with - CSRF token invalid');
-});
-
-// Route de test
-app.get('/', (req, res) => {
-  // On envoie le token CSRF dans la réponse pour les forms frontend
-  res.send(`Hello World! CSRF token: ${req.csrfToken()}`);
-});
-
-// Démarrage serveur
 const port = 3000;
+
+// Winston logger config
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
+  transports: [
+    new winston.transports.Console(), // affichage terminal
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' })
+  ],
+});
+
+// Middleware de sécurité CSRF
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(csrf({ cookie: true }));
+
+// Middleware de log à chaque requête
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
+});
+
+// Route principale
+app.get('/', (req, res) => {
+  logger.info('Route / appelée');
+  res.send('Hello from Observability App!');
+});
+
+// Route simulant une erreur
+app.get('/error', (req, res) => {
+  logger.error('Erreur simulée !');
+  res.status(500).send('Erreur serveur');
+});
+
+// Gestion des erreurs globales
+app.use((err, req, res, next) => {
+  logger.error(`Erreur : ${err.message}`);
+  res.status(500).send('Internal Server Error');
+});
+
+// Démarrage du serveur
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  logger.info(`Server running on http://localhost:${port}`);
 });
