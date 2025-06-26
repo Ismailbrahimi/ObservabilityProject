@@ -1,3 +1,7 @@
 {"level":"info","message":"Server running on http://localhost:3000","timestamp":"2025-06-26T13:34:33.208Z"}
 {"level":"info","message":"Server running on http://localhost:3000","timestamp":"2025-06-26T13:45:21.368Z"}
 {"level":"info","message":"Server running on http://localhost:3000","timestamp":"2025-06-26T13:46:06.609Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2025-06-26T14:28:58.706Z"}
+{"level":"info","message":"GET /","timestamp":"2025-06-26T14:29:41.260Z"}
+{"level":"info","message":"Route / appelée","timestamp":"2025-06-26T14:29:41.261Z"}
+{"level":"info","message":"GET /erreur","timestamp":"2025-06-26T14:29:49.273Z"}

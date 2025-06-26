@@ -16,6 +16,14 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install
 
@@ -56,3 +64,12 @@ jobs:
         with:
           name: dependency-report
           path: reports
+
+      - name: Fail on high severity vulnerabilities
+        run: |
+          if grep -qi "HIGH" reports/dependency-check-report.html; then
+            echo "🚨 High severity vulnerabilities found. Failing pipeline."
+            exit 1
+          else
+            echo "✅ No high severity vulnerabilities detected."
+          fi
