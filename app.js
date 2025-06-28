@@ -43,6 +43,22 @@ app.get('/error', (req, res) => {
   res.status(500).send('Erreur serveur');
 });
 
+// Feature Toggle codé en dur (A ou B)
+const featureToggle = 'A'; // change entre 'A' et 'B' pour activer l'une ou l'autre
+
+// Route de test A/B
+app.get('/welcome', (req, res) => {
+  const userId = Math.floor(Math.random() * 1000); // Simule un ID utilisateur
+
+  if (featureToggle === 'A') {
+    logger.info(`User ${userId} served version A`);
+    res.send('👋 Welcome to version A of our feature!');
+  } else {
+    logger.info(`User ${userId} served version B`);
+    res.send('🌟 Welcome to version B of our feature!');
+  }
+});
+
 // Gestion des erreurs globales
 app.use((err, req, res, next) => {
   logger.error(`Erreur : ${err.message}`);
