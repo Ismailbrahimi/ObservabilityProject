@@ -5,3 +5,16 @@
 {"level":"info","message":"GET /","timestamp":"2025-06-26T14:29:41.260Z"}
 {"level":"info","message":"Route / appelée","timestamp":"2025-06-26T14:29:41.261Z"}
 {"level":"info","message":"GET /erreur","timestamp":"2025-06-26T14:29:49.273Z"}
+{"level":"info","message":"GET /","timestamp":"2025-06-28T12:58:13.458Z"}
+{"level":"info","message":"Route / appelée","timestamp":"2025-06-28T12:58:13.467Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-06-28T12:58:15.588Z"}
+{"level":"info","message":"GET /welcome","timestamp":"2025-06-28T12:58:28.767Z"}
+{"level":"info","message":"GET /erreur","timestamp":"2025-06-28T12:59:17.296Z"}
+{"level":"info","message":"GET /erroro","timestamp":"2025-06-28T12:59:24.083Z"}
+{"level":"info","message":"GET /error","timestamp":"2025-06-28T12:59:27.220Z"}
+{"level":"error","message":"Erreur simulée !","timestamp":"2025-06-28T12:59:27.220Z"}
+{"level":"info","message":"GET /welcome","timestamp":"2025-06-28T12:59:40.977Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2025-06-28T13:01:58.344Z"}
+{"level":"info","message":"GET /welcome","timestamp":"2025-06-28T13:02:35.993Z"}
+{"level":"info","message":"User 423 served version A","timestamp":"2025-06-28T13:02:35.995Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-06-28T13:02:37.942Z"}
